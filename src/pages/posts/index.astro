@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+
+const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+---
+
+<Layout title="Veloria: posts">
+  <h1 class="text-3xl font-bold">Posts</h1>
+  <p class="mt-2 text-gray-500">This is the posts page.</p>
+  <div class="my-2 flex gap-4 flex-col flex-wrap">
+    {
+      allPosts.map((post) => (
+        <Card
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          slug={post.slug}
+        />
+      ))
+    }
+  </div>
+</Layout>

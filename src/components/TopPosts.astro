@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import Card from "../components/Card.astro";
+const posts = await getCollection("blog", ({ data }) => data.feat);
+---
+
+<section class="mt-7">
+  <header class="flex justify-between">
+    <h2 class="text-3xl font-bold capitalize">top posts</h2>
+    <h6>
+      <a href="/posts" class="text-rose-700 hover:text-rose-500 capitalize"
+        >view all posts</a
+      >
+    </h6>
+  </header>
+
+  <p class="my-2">
+    Discover our most captivating posts, where creativity and artistry
+    intertwine to inspire and ignite your imagination. Dive into the essence of
+    Velouria's finest works and let your mind wander in the world of boundless
+    possibilities.
+  </p>
+  <div class="flex gap-4 overflow-auto my-2">
+    {
+      posts.map((post) => (
+        <Card
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          slug={post.slug}
+        />
+      ))
+    }
+  </div>
+</section>
