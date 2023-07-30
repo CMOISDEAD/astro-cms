@@ -1,14 +1,23 @@
 @import url("https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@500&display=swap");
 
 body {
-    font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-family: "Libre Caslon Text", serif;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Libre Caslon Text", serif;
 }
 
 .classic {
-    font-family: "Libre Caslon Text", serif;
-    font-weight: 700;
+  font-family: "Libre Caslon Text", serif;
+  font-weight: 700;
+}
+
+a {
+  @apply text-rose-700 hover:text-rose-600 transition-colors;
 }

@@ -1,0 +1,46 @@
+---
+import Layout from "./Layout.astro";
+
+const { post, headings } = Astro.props;
+---
+
+<Layout title={post.data.title}>
+  <main class="mx-auto container grid grid-cols-4 gap-4">
+    <article
+      class="prose lg:prose-lg max-w-full my-5 prose-headings:text-rose-700 prose-img:mx-auto col-span-4 lg:col-span-3"
+    >
+      <slot />
+    </article>
+    <aside class="col-span-1 hidden lg:block sticky top-5 h-fit">
+      <div class="border border-slate-300 border-dashed rounded-lg p-5 my-3">
+        <h5 class="text-xl text-rose-700 font-bold">Headings</h5>
+        <ul class="mt-5 list-disc list-inside">
+          {
+            headings.map((heading) => (
+              <li class="my-2 truncate">
+                <a href={`#${heading.slug}`}>{heading.text}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="my-3 border border-slate-300 border-dashed rounded-lg p-5">
+        <h5 class="text-xl text-rose-700 font-bold">tags:</h5>
+        <ul class="flex gap-4 mt-3">
+          {
+            post.data.tags.map((tag) => (
+              <li>
+                <a
+                  href="#"
+                  class="bg-rose-100 text-rose-700 rounded-lg px-2 py-1 hover:bg-rose-200"
+                >
+                  # {tag}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </aside>
+  </main>
+</Layout>

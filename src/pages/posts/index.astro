@@ -2,16 +2,18 @@
 import { getCollection } from "astro:content";
 import Layout from "../../layouts/Layout.astro";
 import Card from "../../components/Card.astro";
+import getSortedPosts from "../../utils/getSortedPosts";
 
 const allPosts = await getCollection("blog", ({ data }) => !data.draft);
+const posts = getSortedPosts(allPosts);
 ---
 
-<Layout title="Veloria: posts">
+<Layout title="posts">
   <h1 class="text-3xl font-bold">Posts</h1>
   <p class="mt-2 text-gray-500">This is the posts page.</p>
-  <div class="my-2 flex gap-4 flex-col flex-wrap">
+  <div class="my-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     {
-      allPosts.map((post) => (
+      posts.map((post) => (
         <Card
           title={post.data.title}
           description={post.data.description}
