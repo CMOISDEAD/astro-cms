@@ -4,18 +4,30 @@ interface Props {
   description: string;
   date: Date;
   slug: string;
+  tags: string[];
 }
 
-const { title, description, date, slug } = Astro.props;
+const { title, description, date, slug, tags } = Astro.props;
 ---
 
 <a
-  class="rounded-lg border border-neutral-600/75 p-5 w-full min-w-96 transition-colors hover:border-neutral-400 group cursor-pointer"
+  class="rounded-lg border-2 border-dashed border-slate-300 p-5 w-full min-w-96 transition-colors hover:border-slate-400 group cursor-pointer"
   href={`/posts/${slug}`}
 >
   <h3 class="text-2xl font-bold capitalize group-hover:text-rose-700 truncate">
     {title}
   </h3>
-  <p class="truncate">{description}</p>
-  <p class="text-xs italic">{date.toDateString()}</p>
+  <div class="information group-hover:text-black">
+    <p class="truncate">{description}</p>
+    <p class="text-xs italic">{date.toDateString()}</p>
+    <div class="flex flex-wrap gap-2 mt-2">
+      {
+        tags.map((tag) => (
+          <span class="text-xs bg-rose-100 text-rose-700 rounded-lg px-2 py-1 ">
+            # {tag}
+          </span>
+        ))
+      }
+    </div>
+  </div>
 </a>

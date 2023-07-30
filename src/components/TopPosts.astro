@@ -25,7 +25,7 @@ const posts = getSortedPosts(allPosts);
     Velouria's finest works and let your mind wander in the world of boundless
     possibilities.
   </p>
-  <div class="flex gap-4 overflow-auto my-2">
+  <div class="flex flex-wrap gap-4 overflow-auto my-2">
     {
       posts.map((post) => (
         <Card
@@ -33,6 +33,7 @@ const posts = getSortedPosts(allPosts);
           description={post.data.description}
           date={post.data.date}
           slug={post.slug}
+          tags={post.data.tags}
         />
       ))
     }
