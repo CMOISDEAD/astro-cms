@@ -2,6 +2,7 @@
 import Layout from "./Layout.astro";
 import TagsViewer from "../components/posts/TagsViewer.astro";
 import HeadingsViewer from "../components/posts/HeadingsViewer.astro";
+import Social from "../components/posts/Social.astro";
 
 const { post, headings } = Astro.props;
 ---
@@ -16,6 +17,7 @@ const { post, headings } = Astro.props;
     <aside class="col-span-1 hidden lg:block sticky top-5 h-fit">
       <HeadingsViewer headings={headings} />
       <TagsViewer post={post} />
+      <Social />
     </aside>
   </main>
 </Layout>
