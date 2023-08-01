@@ -1,0 +1,21 @@
+---
+const { post } = Astro.props;
+---
+
+<div class="my-3 border border-slate-300 border-dashed rounded-lg p-5">
+  <h5 class="text-xl text-rose-700 font-bold">tags:</h5>
+  <ul class="flex gap-4 mt-3">
+    {
+      post.data.tags.map((tag) => (
+        <li>
+          <a
+            href="#"
+            class="bg-rose-100 text-rose-700 rounded-lg px-2 py-1 hover:bg-rose-200"
+          >
+            # {tag}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</div>

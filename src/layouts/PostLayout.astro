@@ -1,5 +1,7 @@
 ---
 import Layout from "./Layout.astro";
+import TagsViewer from "../components/posts/TagsViewer.astro";
+import HeadingsViewer from "../components/posts/HeadingsViewer.astro";
 
 const { post, headings } = Astro.props;
 ---
@@ -12,37 +14,8 @@ const { post, headings } = Astro.props;
       <slot />
     </article>
     <aside class="col-span-1 hidden lg:block sticky top-5 h-fit">
-      <div class="border border-slate-300 border-dashed rounded-lg p-5 my-3">
-        <h5 class="text-xl text-rose-700 font-bold">Headings</h5>
-        <ul class="mt-5 list-disc list-inside">
-          {
-            headings.map((heading) => (
-              <li class="my-2 truncate">
-                <a href={`#${heading.slug}`} class="text-black">
-                  {heading.text}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-      <div class="my-3 border border-slate-300 border-dashed rounded-lg p-5">
-        <h5 class="text-xl text-rose-700 font-bold">tags:</h5>
-        <ul class="flex gap-4 mt-3">
-          {
-            post.data.tags.map((tag) => (
-              <li>
-                <a
-                  href="#"
-                  class="bg-rose-100 text-rose-700 rounded-lg px-2 py-1 hover:bg-rose-200"
-                >
-                  # {tag}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
+      <HeadingsViewer headings={headings} />
+      <TagsViewer post={post} />
     </aside>
   </main>
 </Layout>
