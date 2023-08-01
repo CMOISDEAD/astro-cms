@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import cleanTags from "../../utils/cleanTags.js";
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const tags = cleanTags(posts);
+
+  const params = tags.map((tag) => ({
+    params: { slug: tag },
+    props: {
+      tags,
+      posts: posts.filter((post) => post.data.tags.includes(tag)),
+    },
+  }));
+
+  return [...params, { params: { slug: "all" }, props: { tags, posts } }];
+}
+
+const { slug } = Astro.params;
+const { tags, posts } = Astro.props;
+---
+
+<Layout title="tags">
+  <h1 class="text-rose-700 text-4xl font-bold">Tags</h1>
+  <div class="flex flex-wrap gap-4 my-5">
+    {
+      tags.map((tag) => (
+        <a
+          href={`/tags/${tag}`}
+          class="bg-rose-100 text-rose-700 rounded-lg px-2 py-1 hover:bg-rose-200"
+        >
+          # {tag}
+        </a>
+      ))
+    }
+  </div>
+  <h4 class="capitalize text-rose-700 text-2xl font-bold">{slug} posts</h4>
+  <div class="flex flex-wrap gap-4 my-5">
+    {
+      posts.map((post) => (
+        <Card
+          title={post.data.title}
+          description={post.data.description}
+          date={post.data.date}
+          slug={post.slug}
+          tags={post.data.tags}
+        />
+      ))
+    }
+  </div>
+</Layout>

@@ -9,7 +9,7 @@ const { post } = Astro.props;
       post.data.tags.map((tag) => (
         <li>
           <a
-            href="#"
+            href={`/tags/${tag}`}
             class="bg-rose-100 text-rose-700 rounded-lg px-2 py-1 hover:bg-rose-200"
           >
             # {tag}
